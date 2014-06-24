@@ -1,0 +1,45 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.5
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	testCompile(
+		['org.testng:testng:6.8.8'],
+		['org.uncommons:reportng:1.1.4'],
+		['com.google.inject:guice:3.0'],
+		['org.seleniumhq.selenium:selenium-java:2.42.0'],
+		['org.seleniumhq.selenium:selenium-server:2.42.0'],
+		['com.github.detro.ghostdriver:phantomjsdriver:1.1.0']
+	)
+}
+
+test {
+	useTestNG() {
+		suiteXmlBuilder().suite(name: 'exemplo-ghostdriver-gradle') {
+			test (name : 'Test Suite') {
+			  packages {
+				'package' (name: 'ghostdriver.tests.*')
+			  }
+			}
+		}
+	}
+	
+	options {
+		listeners << 'org.uncommons.reportng.HTMLReporter'
+		listeners << 'org.uncommons.reportng.JUnitXMLReporter'
+	}
+	
+	ext.useDefaultListeners = true
+	ext.workingDirectory = 'build/'
+}
