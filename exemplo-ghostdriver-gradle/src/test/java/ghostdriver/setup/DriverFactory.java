@@ -10,8 +10,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -28,8 +27,6 @@ public class DriverFactory
 
 	private static final String CONFIG_FILE = "src/test/resources/config.properties";
 	private static final String DRIVER_PHANTOMJS = "phantomjs";
-	private static final String DRIVER_IE = "ie";
-	private static final String DRIVER_FIREFOX = "firefox";
 	private static final String DRIVER_CHROME = "chrome";
 
 	public static WebDriver getDriver()
@@ -49,10 +46,6 @@ public class DriverFactory
 		if (driverProperty.equals(DRIVER_PHANTOMJS))
 		{
 			dcaps = DesiredCapabilities.phantomjs();
-//			File file = new File("src/test/resources/phantomjs.exe");
-//			dcaps.setCapability(
-//					PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,
-//					file.getAbsolutePath());
 			dcaps.setJavascriptEnabled(true);
 			dcaps.setCapability("takesScreenshot", false);
 			ArrayList<String> cliArgsCap = new ArrayList<String>();
@@ -65,25 +58,14 @@ public class DriverFactory
 			driver = new PhantomJSDriver(dcaps);
 			driver.manage().window().maximize();
 		}
-		if (driverProperty.equals(DRIVER_IE))
-		{
-			dcaps = DesiredCapabilities.internetExplorer();
-			File file = new File("src/test/resources/IEDriverServer.exe");
-			System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
-			dcaps.setJavascriptEnabled(true);
-			driver = new InternetExplorerDriver(dcaps);
-		}
-		if (driverProperty.equals(DRIVER_FIREFOX))
-		{
-			driver = new FirefoxDriver();
-			driver.manage().window().maximize();
-		}
 		if (driverProperty.equals(DRIVER_CHROME))
 		{
-			File file = new File("src/test/resources/chromedriver.exe");
+			File file = new File("/Users/stefan/Downloads/chromedriver");
 			System.setProperty("webdriver.chrome.driver",
 					file.getAbsolutePath());
-			driver = new ChromeDriver();
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--test-type");
+			driver = new ChromeDriver(options);
 			driver.manage().window().maximize();
 		}
 
@@ -110,13 +92,6 @@ public class DriverFactory
 				.pollingEvery(pollingEvery, TimeUnit.SECONDS)
 				.ignoring(NoSuchElementException.class)
 				.ignoring(StaleElementReferenceException.class);		
-	}
-
-	public static Wait<WebDriver> createWaitDefault(long withTimeout,
-			long pollingEvery)
-	{
-		return new FluentWait<WebDriver>(getDriver()).withTimeout(withTimeout,
-				TimeUnit.SECONDS).pollingEvery(pollingEvery, TimeUnit.SECONDS);
 	}
 	
 	private static Properties loadPropertiesFile() throws Exception

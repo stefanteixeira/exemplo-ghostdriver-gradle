@@ -10,9 +10,9 @@ public class CarrinhoComprasTest extends BaseTest
 {
 	private HomePage home;
 	private CarrinhoComprasPage carrinho;
-
+	
 	@Test
-	public void adicionarLivroCarrinho()
+	public void adicionarProdutoAoCarrinho()
 	{
 		home = new HomePage();
 		carrinho = home.adicionarAoCarrinho("Fortaleza Digital");

@@ -16,7 +16,6 @@ public class ScreenshotOnFailureListener extends TestListenerAdapter
 	@Override
 	public void onTestFailure(ITestResult testResult)
 	{
-		super.onTestFailure(testResult);
 		captureScreenshot(testResult.getClass().getSimpleName(), testResult.getMethod().getMethodName());
 	}
 
@@ -24,14 +23,14 @@ public class ScreenshotOnFailureListener extends TestListenerAdapter
 	{
 		try
 		{
-			new File("target/screenshots/").mkdirs();
+			new File("screenshots/").mkdirs();
 			Calendar c = Calendar.getInstance();
 			int hora = c.get(Calendar.HOUR_OF_DAY);
 			int minuto = c.get(Calendar.MINUTE);
 
 			File f = ((TakesScreenshot) getDriver())
 					.getScreenshotAs(OutputType.FILE);
-			FileUtils.copyFile(f, new File("target/screenshots/failures/" + className
+			FileUtils.copyFile(f, new File("screenshots/failures/" + className
 					+ "-" + methodName + "-" + hora + "-" + minuto
 					+ "-screenshot.png"));
 		} catch (Exception e)

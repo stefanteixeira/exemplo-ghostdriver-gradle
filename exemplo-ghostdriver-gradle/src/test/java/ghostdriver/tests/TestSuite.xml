@@ -1,10 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
 <suite name="Test Suite">
-  <test name="Regression">
-    <classes>
-       <class name="ghostdriver.tests.CarrinhoComprasTest" />
-       <class name="ghostdriver.tests.CompararProdutosTest" />
-       <class name="ghostdriver.tests.MapaSiteTest" />   
-    </classes>
+  <test name="Tests">
+    <packages>
+    	<package name="ghostdriver.tests.*"/>
+    </packages>
   </test>
 </suite>
