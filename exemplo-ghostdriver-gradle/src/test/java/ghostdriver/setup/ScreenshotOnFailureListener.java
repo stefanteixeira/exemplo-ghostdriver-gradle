@@ -16,7 +16,7 @@ public class ScreenshotOnFailureListener extends TestListenerAdapter
 	@Override
 	public void onTestFailure(ITestResult testResult)
 	{
-		captureScreenshot(testResult.getClass().getSimpleName(), testResult.getMethod().getMethodName());
+		captureScreenshot(testResult.getTestClass().getRealClass().getSimpleName(), testResult.getMethod().getMethodName());
 	}
 
 	public void captureScreenshot(String className, String methodName)

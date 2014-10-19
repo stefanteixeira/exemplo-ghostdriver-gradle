@@ -56,7 +56,6 @@ public class DriverFactory
 			dcaps.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS,
 					cliArgsCap);
 			driver = new PhantomJSDriver(dcaps);
-			driver.manage().window().maximize();
 		}
 		if (driverProperty.equals(DRIVER_CHROME))
 		{
@@ -66,9 +65,9 @@ public class DriverFactory
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--test-type");
 			driver = new ChromeDriver(options);
-			driver.manage().window().maximize();
 		}
 
+		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		wait = null;
 
@@ -79,7 +78,7 @@ public class DriverFactory
 	{
 		if (wait == null)
 		{
-			wait = createWait(10, 2);
+			wait = createWait(10, 500);
 		}
 
 		return wait;
@@ -89,19 +88,11 @@ public class DriverFactory
 	{
 		return new FluentWait<WebDriver>(getDriver())
 				.withTimeout(withTimeout, TimeUnit.SECONDS)
-				.pollingEvery(pollingEvery, TimeUnit.SECONDS)
+				.pollingEvery(pollingEvery, TimeUnit.MILLISECONDS)
 				.ignoring(NoSuchElementException.class)
 				.ignoring(StaleElementReferenceException.class);		
 	}
 	
-	private static Properties loadPropertiesFile() throws Exception
-	{
-		config = new Properties();
-		config.load(new FileReader(CONFIG_FILE));
-
-		return config;
-	}
-
 	public static String getProperty(String property)
 	{
 		try {
@@ -113,5 +104,13 @@ public class DriverFactory
 			e.printStackTrace();
 			return "Não foi possível carregar a propriedade do arquivo de configurações.";
 		}
+	}
+	
+	private static Properties loadPropertiesFile() throws Exception
+	{
+		config = new Properties();
+		config.load(new FileReader(CONFIG_FILE));
+
+		return config;
 	}
 }

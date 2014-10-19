@@ -12,6 +12,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage
 {
+	@FindBy(css="a[title='Entrar']")
+	private WebElement linkMenuEntrar;
+	
+	@FindBy(css="a[title='Sair']")
+	private WebElement linkMenuSair;
+	
 	@FindBy(css="a[title='Mapa do Site']")
 	private WebElement linkMapaSite;
 	
@@ -83,10 +89,23 @@ public class HomePage extends BasePage
 		return wait.until(ExpectedConditions.textToBePresentInElement(msgListaCompVazia, MENSAGEM_LISTA_COMPARACAO_VAZIA));
 	}
 	
+	public LoginPage abrirPaginaLogin()
+	{
+		linkMenuEntrar.click();
+		
+		return new LoginPage();
+	}
+	
 	public MapaSitePage abrirMapaSite()
 	{
 		linkMapaSite.click();
 		
 		return new MapaSitePage();
+	}
+
+	public void sair()
+	{
+		linkMenuSair.click();
+		wait.until(ExpectedConditions.visibilityOf(linkMenuEntrar));
 	}
 }
