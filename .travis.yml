@@ -1,6 +1,8 @@
 language: java
 jdk:
-- openjdk7
-notifications: 
-   email: 
-   - stefanfk@gmail.com
+  - openjdk7
+notifications:
+  email:
+    recipients:
+      - stefanfk@gmail.com
+    on_success: always
