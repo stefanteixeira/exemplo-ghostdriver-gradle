@@ -1,5 +1,7 @@
 package ghostdriver.tests;
 
+import static ghostdriver.setup.Constantes.NUMERO_CATEGORIAS;
+import static ghostdriver.setup.Constantes.NUMERO_PRODUTOS;
 import static org.testng.Assert.assertEquals;
 import ghostdriver.pageobjects.HomePage;
 import ghostdriver.pageobjects.MapaSitePage;
@@ -22,12 +24,12 @@ public class MapaSiteTest extends BaseTest
 	@Test
 	public void verificarNumeroCategorias()
 	{
-		assertEquals(23, mapaSite.getNumeroCategorias());
+		assertEquals(NUMERO_CATEGORIAS, mapaSite.getNumeroCategorias());
 	}
 	
 	@Test
 	public void verificarNumeroProdutos()
 	{
-		assertEquals(43, mapaSite.getNumeroProdutos());
+		assertEquals(NUMERO_PRODUTOS, mapaSite.getNumeroProdutos());
 	}
 }

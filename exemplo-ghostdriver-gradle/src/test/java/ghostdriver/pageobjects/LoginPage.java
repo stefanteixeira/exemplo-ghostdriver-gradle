@@ -19,6 +19,18 @@ public class LoginPage extends BasePage
 	@FindBy(className="error-msg")
 	private WebElement msgErro;
 	
+	@FindBy(id="advice-required-entry-email")
+	private WebElement msgEmailObrigatorio;
+	
+	@FindBy(id="advice-required-entry-pass")
+	private WebElement msgSenhaObrigatoria;
+	
+	@FindBy(id="advice-validate-email-email")
+	private WebElement msgEmailInvalido;
+	
+	@FindBy(id="advice-validate-password-pass")
+	private WebElement msgSenhaInvalida;
+	
 	public LoginPage()
 	{
 		super();
@@ -43,10 +55,43 @@ public class LoginPage extends BasePage
 		
 		wait.until(ExpectedConditions.visibilityOf(msgErro));
 	}
+	
+	public void loginSemSucessoValidacaoCampos(String _email, String _senha)
+	{
+		preencherESubmeterForm(_email, _senha);
+	}
 
 	public String getMensagemErro()
 	{
 		return msgErro.getText();
+	}
+	
+	public String getMsgEmailObrigatorio()
+	{
+		wait.until(ExpectedConditions.visibilityOf(msgEmailObrigatorio));
+		
+		return msgEmailObrigatorio.getText();
+	}
+	
+	public String getMsgSenhaObrigatoria()
+	{
+		wait.until(ExpectedConditions.visibilityOf(msgSenhaObrigatoria));
+		
+		return msgSenhaObrigatoria.getText();
+	}
+	
+	public String getMsgEmailInvalido()
+	{
+		wait.until(ExpectedConditions.visibilityOf(msgEmailInvalido));
+		
+		return msgEmailInvalido.getText();
+	}
+	
+	public String getMsgSenhaInvalida()
+	{
+		wait.until(ExpectedConditions.visibilityOf(msgSenhaInvalida));
+		
+		return msgSenhaInvalida.getText();
 	}
 	
 	private void preencherESubmeterForm(String _email, String _senha)

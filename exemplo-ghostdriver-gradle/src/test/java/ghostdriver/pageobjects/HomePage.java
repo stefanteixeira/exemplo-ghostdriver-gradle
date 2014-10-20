@@ -1,5 +1,8 @@
 package ghostdriver.pageobjects;
 
+import static ghostdriver.setup.Constantes.TITULO_PAGINA_AJUDA;
+import static ghostdriver.setup.Constantes.TITULO_PAGINA_SAC;
+import static ghostdriver.setup.Constantes.TITULO_PAGINA_SOBRE_NOS;
 import static ghostdriver.setup.Mensagens.MENSAGEM_CARRINHO_VAZIO;
 import static ghostdriver.setup.Mensagens.MENSAGEM_LISTA_COMPARACAO_VAZIA;
 import static ghostdriver.setup.Mensagens.MENSAGEM_SUCESSO_LISTA_COMPARACAO;
@@ -27,6 +30,18 @@ public class HomePage extends BasePage
 	@FindBy(xpath="//button[@title='Buscar']")
 	private WebElement btnBuscar;
 	
+	@FindBy(linkText="Sobre Nós")
+	private WebElement linkSobreNos;
+
+	@FindBy(linkText="Serviço ao Cliente")
+	private WebElement linkSac;
+	
+	@FindBy(linkText="Página de Ajuda")
+	private WebElement linkAjuda;
+	
+	@FindBy(xpath="//div[@id='bloco-twitter']/p/a/img")
+	private WebElement linkTwitter;
+	
 	public HomePage()
 	{
 		super();
@@ -53,6 +68,15 @@ public class HomePage extends BasePage
 		String xpathLinkComparacao = "//a[contains(text(), '"+produto+"')]/../../div/ul/li/a[contains(text(), 'Adicionar para Comparação')]";
 		WebElement linkAdicionarComparacao = driver.findElement(By.xpath(xpathLinkComparacao));
 		linkAdicionarComparacao.click();
+	}
+
+	public ListaDesejosPage adicionarListaDesejos(String produto)
+	{
+		String xpathLinkListaDesejos = "//a[contains(text(), '"+produto+"')]/../../div/ul/li/a[contains(text(), 'Adicionar à Lista de Desejos')]";
+		WebElement linkListaDesejos = driver.findElement(By.xpath(xpathLinkListaDesejos));
+		linkListaDesejos.click();
+		
+		return new ListaDesejosPage();
 	}
 	
 	public BuscaProdutosPage buscarProduto(String produto)
@@ -107,5 +131,33 @@ public class HomePage extends BasePage
 	{
 		linkMenuSair.click();
 		wait.until(ExpectedConditions.visibilityOf(linkMenuEntrar));
+	}
+	
+	public void abrirLinkSobreNos()
+	{
+		linkSobreNos.click();
+		
+		wait.until(ExpectedConditions.titleContains(TITULO_PAGINA_SOBRE_NOS));
+	}
+	
+	public void abrirLinkSac()
+	{
+		linkSac.click();
+		
+		wait.until(ExpectedConditions.titleContains(TITULO_PAGINA_SAC));
+	}
+	
+	public void abrirLinkAjuda()
+	{
+		linkAjuda.click();
+		
+		wait.until(ExpectedConditions.titleContains(TITULO_PAGINA_AJUDA));
+	}
+	
+	public void abrirLinkTwitter()
+	{
+		linkTwitter.click();
+		
+		wait.until(ExpectedConditions.titleContains("Twitter"));
 	}
 }

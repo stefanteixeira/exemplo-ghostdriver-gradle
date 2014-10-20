@@ -78,7 +78,7 @@ public class DriverFactory
 	{
 		if (wait == null)
 		{
-			wait = createWait(10, 500);
+			wait = createWait(10, 100);
 		}
 
 		return wait;

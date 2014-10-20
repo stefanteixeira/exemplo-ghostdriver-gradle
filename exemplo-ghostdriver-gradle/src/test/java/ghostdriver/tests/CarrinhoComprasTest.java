@@ -1,5 +1,6 @@
 package ghostdriver.tests;
 
+import static ghostdriver.setup.Constantes.LIVRO_FORTALEZA_DIGITAL;
 import static org.testng.Assert.assertTrue;
 import ghostdriver.pageobjects.CarrinhoComprasPage;
 import ghostdriver.pageobjects.HomePage;
@@ -15,7 +16,7 @@ public class CarrinhoComprasTest extends BaseTest
 	public void adicionarProdutoAoCarrinho()
 	{
 		home = new HomePage();
-		carrinho = home.adicionarAoCarrinho("Fortaleza Digital");
+		carrinho = home.adicionarAoCarrinho(LIVRO_FORTALEZA_DIGITAL);
 		
 		assertTrue(carrinho.isMsgSucessoPresente());
 	}
