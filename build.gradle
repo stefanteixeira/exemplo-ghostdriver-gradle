@@ -18,8 +18,8 @@ dependencies {
 		['org.testng:testng:6.8.8'],
 		['org.uncommons:reportng:1.1.4'],
 		['com.google.inject:guice:3.0'],
-		['org.seleniumhq.selenium:selenium-java:2.42.0'],
-		['org.seleniumhq.selenium:selenium-server:2.42.0'],
+		['org.seleniumhq.selenium:selenium-java:2.43.1'],
+		['org.seleniumhq.selenium:selenium-server:2.43.1'],
 		['com.github.detro.ghostdriver:phantomjsdriver:1.1.0']
 	)
 }
@@ -33,11 +33,6 @@ test {
 			  }
 			}
 		}
-	}
-	
-	options {
-		listeners << 'org.uncommons.reportng.HTMLReporter'
-		listeners << 'org.uncommons.reportng.JUnitXMLReporter'
 	}
 	
 	ext.useDefaultListeners = true
