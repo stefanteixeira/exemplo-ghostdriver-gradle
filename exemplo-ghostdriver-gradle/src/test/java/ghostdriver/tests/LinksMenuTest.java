@@ -27,7 +27,7 @@ public class LinksMenuTest extends BaseTest
 	{
 		home.abrirMinhaConta();
 		
-		assertTrue(getUrl().contains("/customer/account/index"));
+		assertTrue(getUrl().contains("/customer/account"));
 	}
 	
 	@Test
