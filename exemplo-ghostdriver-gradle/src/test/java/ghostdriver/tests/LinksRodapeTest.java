@@ -40,4 +40,20 @@ public class LinksRodapeTest extends BaseTest
 		
 		assertTrue(getUrl().contains("ajuda-loja-virtual"));
 	}
+	
+	@Test
+	public void verificarRedirecionamentoLinkTermosBusca()
+	{
+		home.abrirLinkTermosBusca();
+		
+		assertTrue(getUrl().contains("catalogsearch/term"));
+	}
+	
+	@Test
+	public void verificarRedirecionamentoLinkBuscaAvancada()
+	{
+		home.abrirLinkBuscaAvancada();
+		
+		assertTrue(getUrl().contains("catalogsearch/advanced"));
+	}
 }

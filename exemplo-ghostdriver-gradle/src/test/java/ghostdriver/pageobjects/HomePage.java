@@ -1,8 +1,10 @@
 package ghostdriver.pageobjects;
 
 import static ghostdriver.setup.Constantes.TITULO_PAGINA_AJUDA;
+import static ghostdriver.setup.Constantes.TITULO_PAGINA_BUSCA_AVANCADA;
 import static ghostdriver.setup.Constantes.TITULO_PAGINA_SAC;
 import static ghostdriver.setup.Constantes.TITULO_PAGINA_SOBRE_NOS;
+import static ghostdriver.setup.Constantes.TITULO_PAGINA_TERMOS_BUSCA;
 import static ghostdriver.setup.Mensagens.MENSAGEM_CARRINHO_VAZIO;
 import static ghostdriver.setup.Mensagens.MENSAGEM_LISTA_COMPARACAO_VAZIA;
 import static ghostdriver.setup.Mensagens.MENSAGEM_SUCESSO_LISTA_COMPARACAO;
@@ -18,11 +20,20 @@ public class HomePage extends BasePage
 	@FindBy(css="a[title='Entrar']")
 	private WebElement linkMenuEntrar;
 	
+	@FindBy(css="a[title='Minha Conta']")
+	private WebElement linkMenuMinhaConta;
+	
+	@FindBy(xpath="//div/div/div[1]/div/div/ul/li[2]/a")
+	private WebElement linkMenuListaDesejos;
+	
+	@FindBy(xpath="//div/div/div[1]/div/div/ul/li[3]/a")
+	private WebElement linkMenuCarrinho;
+	
+	@FindBy(css="a[title='Fechar Compra']")
+	private WebElement linkMenuFecharCompra;
+	
 	@FindBy(css="a[title='Sair']")
 	private WebElement linkMenuSair;
-	
-	@FindBy(css="a[title='Mapa do Site']")
-	private WebElement linkMapaSite;
 	
 	@FindBy(id="search")
 	private WebElement campoBusca;
@@ -38,6 +49,15 @@ public class HomePage extends BasePage
 	
 	@FindBy(linkText="Página de Ajuda")
 	private WebElement linkAjuda;
+
+	@FindBy(css="a[title='Mapa do Site']")
+	private WebElement linkMapaSite;
+	
+	@FindBy(css="a[title='Termos de Busca']")
+	private WebElement linkTermosBusca;
+	
+	@FindBy(css="a[title='Busca Avançada']")
+	private WebElement linkBuscaAvancada;
 	
 	@FindBy(xpath="//div[@id='bloco-twitter']/p/a/img")
 	private WebElement linkTwitter;
@@ -120,6 +140,34 @@ public class HomePage extends BasePage
 		return new LoginPage();
 	}
 	
+	public MinhaContaPage abrirMinhaConta()
+	{
+		linkMenuMinhaConta.click();
+		
+		return new MinhaContaPage();
+	}
+	
+	public ListaDesejosPage abrirListaDesejos()
+	{
+		linkMenuListaDesejos.click();
+		
+		return new ListaDesejosPage();
+	}
+	
+	public CarrinhoComprasPage abrirCarrinho()
+	{
+		linkMenuCarrinho.click();
+		
+		return new CarrinhoComprasPage();
+	}
+	
+	public FecharCompraPage abrirPaginaFecharCompra()
+	{
+		linkMenuFecharCompra.click();
+		
+		return new FecharCompraPage();
+	}
+	
 	public MapaSitePage abrirMapaSite()
 	{
 		linkMapaSite.click();
@@ -152,6 +200,20 @@ public class HomePage extends BasePage
 		linkAjuda.click();
 		
 		wait.until(ExpectedConditions.titleContains(TITULO_PAGINA_AJUDA));
+	}
+	
+	public void abrirLinkTermosBusca()
+	{
+		linkTermosBusca.click();
+		
+		wait.until(ExpectedConditions.titleContains(TITULO_PAGINA_TERMOS_BUSCA));
+	}
+	
+	public void abrirLinkBuscaAvancada()
+	{
+		linkBuscaAvancada.click();
+		
+		wait.until(ExpectedConditions.titleContains(TITULO_PAGINA_BUSCA_AVANCADA));
 	}
 	
 	public void abrirLinkTwitter()

@@ -64,10 +64,10 @@ public class DriverFactory
 					file.getAbsolutePath());
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--test-type");
+			options.addArguments("start-maximized");
 			driver = new ChromeDriver(options);
 		}
 
-		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		wait = null;
 

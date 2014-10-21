@@ -1,5 +1,7 @@
 package ghostdriver.pageobjects;
 
+import static ghostdriver.setup.Constantes.TITULO_PAGINA_BUSCA;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -21,7 +23,7 @@ public class BuscaProdutosPage extends BasePage
 	@Override
 	protected ExpectedCondition<?> getPageLoadCondition()
 	{
-		return ExpectedConditions.titleContains("Resultados da busca");
+		return ExpectedConditions.titleContains(TITULO_PAGINA_BUSCA);
 	}
 	
 	public String getMensagemBuscaVazia()
